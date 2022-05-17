@@ -3,10 +3,27 @@ Feature: Shopping cart - Linio.com.co
   i want to add items to my Shopping Cart
   To Buy easily many items.
 
-  Scenario: add items to the car
+  Background:
     Given The user is at web page https://www.linio.com.co
     When The user select the category Hogar
     And The user select the section Colchones y Base Cama
-    And The user Select the item Super Mega Combo Azul Queen 160x190 Resortado Marshall
-    And The user adds 3 units to the Shopping cart and he go to the Shopping cart
-    Then The user see 3 units the item Super Mega Combo Azul Queen 160x190 Resortado Marshall and it's price
+
+
+  Scenario Outline: add items to the car
+    When The user Select the item <itemName>
+    And The user adds <numberOfUnits> units to the Shopping cart and he go to the Shopping cart
+    Then The user see <numberOfUnits> units the item <itemName> and it's price
+    Examples:
+      | itemName                                               | numberOfUnits |
+      | Super Mega Combo Azul Queen 160x190 Resortado Marshall | 3             |
+
+  Scenario Outline: remove items to the car
+    When The user Select the item <itemName>
+    And The user adds <numberOfUnits> units to the Shopping cart and he go to the Shopping cart
+    And The user adds <numberOfUnits> units to the Shopping cart and he go to the Shopping cart
+    Then The user see <numberOfUnits> units the item <itemName> and it's price
+    And The user remove <numberOfUnits> unit and see <message>
+
+    Examples:
+      | itemName                                               | numberOfUnits | message                         |
+      | Super Mega Combo Azul Queen 160x190 Resortado Marshall | 3             | No hay productos en tu carrito’ |
