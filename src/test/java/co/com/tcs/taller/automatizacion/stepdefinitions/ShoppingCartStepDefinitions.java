@@ -4,6 +4,7 @@ import co.com.tcs.taller.automatizacion.tasks.AddItemToShoppingCart;
 import co.com.tcs.taller.automatizacion.tasks.SelectCategory;
 import co.com.tcs.taller.automatizacion.tasks.SelectSection;
 import co.com.tcs.taller.automatizacion.tasks.SelectThis;
+import co.com.tcs.taller.automatizacion.userinterfaces.CartPage;
 import co.com.tcs.taller.automatizacion.userinterfaces.LinioHomePage;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -16,6 +17,7 @@ import net.serenitybdd.screenplay.actors.OnlineCast;
 public class ShoppingCartStepDefinitions {
 
     LinioHomePage homePage;
+    CartPage cartPage;
 
     @Before
     public void setup(){
@@ -50,7 +52,7 @@ public class ShoppingCartStepDefinitions {
 
     @When("^the user go to the Shopping cart$")
     public void theUserGoToTheShoppingCart() {
-
+        OnStage.theActorInTheSpotlight().attemptsTo(Open.browserOn(cartPage));
     }
 
     @Then("^The user see (\\d+) units the item (.*) and it's price$")
