@@ -1,7 +1,9 @@
 package co.com.tcs.taller.automatizacion.stepdefinitions;
 
+import co.com.tcs.taller.automatizacion.tasks.AddItemToShoppingCart;
 import co.com.tcs.taller.automatizacion.tasks.SelectCategory;
 import co.com.tcs.taller.automatizacion.tasks.SelectSection;
+import co.com.tcs.taller.automatizacion.tasks.SelectThis;
 import co.com.tcs.taller.automatizacion.userinterfaces.LinioHomePage;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -10,7 +12,6 @@ import cucumber.api.java.en.When;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
-import org.apache.bcel.generic.Select;
 
 public class ShoppingCartStepDefinitions {
 
@@ -39,12 +40,12 @@ public class ShoppingCartStepDefinitions {
 
     @When("^The user Select the item (.*)$")
     public void theUserSelectTheItem(String item) {
-
+        OnStage.theActorInTheSpotlight().attemptsTo(SelectThis.item(item));
     }
 
     @When("^The user adds (\\d+) units to the Shopping cart$")
     public void theUserAddsUnitsToTheShoppingCart(int numberOfUnits) {
-
+        OnStage.theActorInTheSpotlight().attemptsTo(AddItemToShoppingCart.thisNumerOfUnits(numberOfUnits));
     }
 
     @When("^the user go to the Shopping cart$")
