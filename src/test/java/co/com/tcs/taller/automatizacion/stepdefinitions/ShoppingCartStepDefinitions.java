@@ -59,10 +59,10 @@ public class ShoppingCartStepDefinitions {
 
     @Then("^The user see (\\d+) units the item (.*) and it's price$")
     public void theUserSeeUnitsTheItemAndItSPrice(int numberOfUnits, String itemName) {
-        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(IsTheItem.same(3, itemName),Matchers.comparesEqualTo(true)));
+        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(IsTheItem.same(numberOfUnits, itemName),Matchers.comparesEqualTo(true)));
     }
 
-    @Then("^The user remove all units and see (.*)$")
+    @Then("^The user see the message (.*)$")
     public void theUserRemoveUnitAndSeeNoHayProductosEnTuCarrito(String message) {
         OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(IsEmptyCartMessage.visible(),Matchers.comparesEqualTo(message)));
     }

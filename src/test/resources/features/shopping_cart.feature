@@ -21,8 +21,8 @@ Feature: Shopping cart - Linio.com.co
     When The user Select the item <itemName>
     And The user adds <numberOfUnits> units to the Shopping cart and he go to the Shopping cart
     And The user remove all units to the Shopping cart
-    And The user remove all units and see <message>
+    And The user see the message <message>
 
     Examples:
-      | itemName                                               | numberOfUnits | message                         |
+      | itemName                                               | numberOfUnits | message                        |
       | Super Mega Combo Azul Queen 160x190 Resortado Marshall | 3             | No hay productos en tu carrito |
