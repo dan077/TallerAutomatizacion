@@ -11,4 +11,7 @@ public class CartPage extends PageObject {
     public static final Target PRODUCT_NAME_CART = Target.the("product_name_cart").locatedBy("//div[@class=\"item-title col-10\"]/span/a");
     public static final Target PRODUCT_PRICE_CART = Target.the("product_price_cart").locatedBy("//div[@class=\"lowest-price\"]/div");
     public static final Target NUMBER_OF_ITEMS_CART = Target.the("number_of_items_cart").locatedBy("//select[@class=\"form-control form-control-sm ng-pristine ng-untouched ng-valid ng-not-empty\"]/option[@selected=\"selected\"]");
+
+    public static final Target BUTTON_DELETE_ITEMS_CART = Target.the("button_delete_items_cart").locatedBy("//a[@ng-click=\"cart.removeItem(item.sku)\"]");
+    public static final Target MESSAGE_EMPTY_SHOPPING_CART = Target.the("button_delete_items_cart").locatedBy("//h2[@class=\"highlight col-md-6 offset-md-3\"]");
 }

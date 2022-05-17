@@ -1,11 +1,9 @@
 package co.com.tcs.taller.automatizacion.stepdefinitions;
 
 import co.com.tcs.taller.automatizacion.models.Item;
+import co.com.tcs.taller.automatizacion.questions.IsEmptyCartMessage;
 import co.com.tcs.taller.automatizacion.questions.IsTheItem;
-import co.com.tcs.taller.automatizacion.tasks.AddItemToShoppingCart;
-import co.com.tcs.taller.automatizacion.tasks.SelectCategory;
-import co.com.tcs.taller.automatizacion.tasks.SelectSection;
-import co.com.tcs.taller.automatizacion.tasks.SelectThis;
+import co.com.tcs.taller.automatizacion.tasks.*;
 import co.com.tcs.taller.automatizacion.userinterfaces.CartPage;
 import co.com.tcs.taller.automatizacion.userinterfaces.LinioHomePage;
 import cucumber.api.java.Before;
@@ -54,9 +52,19 @@ public class ShoppingCartStepDefinitions {
         OnStage.theActorInTheSpotlight().attemptsTo(AddItemToShoppingCart.thisNumerOfUnits(numberOfUnits));
     }
 
+    @When("^The user remove all units to the Shopping cart$")
+    public void theUserRemoveAllUnitsToTheShoppingCart() {
+        OnStage.theActorInTheSpotlight().attemptsTo(RemoveItemToShoppingCart.all());
+    }
+
     @Then("^The user see (\\d+) units the item (.*) and it's price$")
     public void theUserSeeUnitsTheItemAndItSPrice(int numberOfUnits, String itemName) {
         OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(IsTheItem.same(3, itemName),Matchers.comparesEqualTo(true)));
+    }
+
+    @Then("^The user remove all units and see (.*)$")
+    public void theUserRemoveUnitAndSeeNoHayProductosEnTuCarrito(String message) {
+        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(IsEmptyCartMessage.visible(),Matchers.comparesEqualTo(message)));
     }
 
 }

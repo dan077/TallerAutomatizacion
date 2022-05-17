@@ -1,9 +1,29 @@
 package co.com.tcs.taller.automatizacion.models;
 
+import cucumber.api.java.eo.Do;
+
+import java.util.Objects;
+
 public class Item {
     private String name;
-    private Double price;
+    private Double pricePerUnit;
     private int numberOfItems;
+
+    private double total;
+
+    public Item(String name, Double price, int numberOfItems) {
+        this.name = name;
+        this.pricePerUnit = price;
+        this.numberOfItems = numberOfItems;
+        this.total = price*numberOfItems;
+    }
+
+    public Item(String name, Double price, int numberOfItems, Double total) {
+        this.name = name;
+        this.pricePerUnit = price;
+        this.numberOfItems = numberOfItems;
+        this.total = total;
+    }
 
     public String getName() {
         return name;
@@ -13,12 +33,12 @@ public class Item {
         this.name = name;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getPricePerUnit() {
+        return pricePerUnit;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setPricePerUnit(Double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
     }
 
     public int getNumberOfItems() {
@@ -29,18 +49,29 @@ public class Item {
         this.numberOfItems = numberOfItems;
     }
 
-    public Item(String name, Double price, int numberOfItems) {
-        this.name = name;
-        this.price = price;
-        this.numberOfItems = numberOfItems;
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+
+
+    public Boolean compare(Item otherItem){
+        return otherItem.name.equals(name) && otherItem.numberOfItems == otherItem.numberOfItems && otherItem.total == total;
     }
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "{" +
                 "name='" + name + '\'' +
-                ", price=" + price +
+                ", pricePerUnit=" + pricePerUnit +
                 ", numberOfItems=" + numberOfItems +
+                ", total=" + total +
                 '}';
     }
+
+
 }

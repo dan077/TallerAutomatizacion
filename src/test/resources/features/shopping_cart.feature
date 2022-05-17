@@ -20,10 +20,9 @@ Feature: Shopping cart - Linio.com.co
   Scenario Outline: remove items to the car
     When The user Select the item <itemName>
     And The user adds <numberOfUnits> units to the Shopping cart and he go to the Shopping cart
-    And The user adds <numberOfUnits> units to the Shopping cart and he go to the Shopping cart
-    Then The user see <numberOfUnits> units the item <itemName> and it's price
-    And The user remove <numberOfUnits> unit and see <message>
+    And The user remove all units to the Shopping cart
+    And The user remove all units and see <message>
 
     Examples:
       | itemName                                               | numberOfUnits | message                         |
-      | Super Mega Combo Azul Queen 160x190 Resortado Marshall | 3             | No hay productos en tu carrito’ |
+      | Super Mega Combo Azul Queen 160x190 Resortado Marshall | 3             | No hay productos en tu carrito |
