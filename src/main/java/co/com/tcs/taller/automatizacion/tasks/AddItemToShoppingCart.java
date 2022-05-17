@@ -3,10 +3,14 @@ package co.com.tcs.taller.automatizacion.tasks;
 import co.com.tcs.taller.automatizacion.models.Item;
 import co.com.tcs.taller.automatizacion.models.WriteToFile;
 import co.com.tcs.taller.automatizacion.userinterfaces.SelectedItemPage;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Click;
+
+import static co.com.tcs.taller.automatizacion.utils.Utils.TargetToString;
+import static co.com.tcs.taller.automatizacion.utils.Utils.TargetWithSimbolAndDotsToDouble;
 
 public class AddItemToShoppingCart implements Task {
     private int numberOfUnits;
@@ -17,13 +21,8 @@ public class AddItemToShoppingCart implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(Click.on(SelectedItemPage.SELECT_DROPDOWN_NUMBER_OF_ITEMS_TO_ADD),
-                Click.on(SelectedItemPage.SELECT_NUMBER_OF_ITEMS_TO_ADD.of(""+ numberOfUnits)),
-                Click.on(SelectedItemPage.BUTTON_ADD_SHOPPING_CART));
-
-        String name = SelectedItemPage.PRODUCT_NAME.resolveAllFor(actor).get(0).getText();
-        String x = SelectedItemPage.PRODUCT_PRICE.resolveAllFor(actor).get(0).getText().substring(1).replace(".","");
-        Double Price = Double.parseDouble(x);
+        String name = TargetToString(SelectedItemPage.PRODUCT_NAME,actor);
+        Double Price = TargetWithSimbolAndDotsToDouble(SelectedItemPage.PRODUCT_PRICE,actor);
         Item item = new Item(name,Price,numberOfUnits);
 
         try{
@@ -32,7 +31,15 @@ public class AddItemToShoppingCart implements Task {
             System.out.println("No se pudo guardar el item en un archivo :(");
         }
 
-        actor.remember("Item",new Item(name,Price,numberOfUnits));
+        actor.remember("Item",item);
+
+        actor.attemptsTo(Click.on(SelectedItemPage.SELECT_DROPDOWN_NUMBER_OF_ITEMS_TO_ADD),
+                Click.on(SelectedItemPage.SELECT_NUMBER_OF_ITEMS_TO_ADD.of(""+ numberOfUnits)),
+                Click.on(SelectedItemPage.BUTTON_ADD_SHOPPING_CART),
+                Click.on(SelectedItemPage.CLOSE_ALERT_ADD_TO_CAR),
+                Click.on(SelectedItemPage.BUTTON_SHOPPING_CART)
+        );
+
     }
 
     public static AddItemToShoppingCart thisNumerOfUnits(int numberOfUnits){

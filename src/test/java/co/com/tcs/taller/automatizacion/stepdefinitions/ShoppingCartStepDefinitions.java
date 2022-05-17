@@ -1,5 +1,7 @@
 package co.com.tcs.taller.automatizacion.stepdefinitions;
 
+import co.com.tcs.taller.automatizacion.models.Item;
+import co.com.tcs.taller.automatizacion.questions.IsTheItem;
 import co.com.tcs.taller.automatizacion.tasks.AddItemToShoppingCart;
 import co.com.tcs.taller.automatizacion.tasks.SelectCategory;
 import co.com.tcs.taller.automatizacion.tasks.SelectSection;
@@ -10,9 +12,11 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
+import org.hamcrest.Matchers;
 
 public class ShoppingCartStepDefinitions {
 
@@ -45,19 +49,14 @@ public class ShoppingCartStepDefinitions {
         OnStage.theActorInTheSpotlight().attemptsTo(SelectThis.item(item));
     }
 
-    @When("^The user adds (\\d+) units to the Shopping cart$")
+    @When("^The user adds (\\d+) units to the Shopping cart and he go to the Shopping cart$")
     public void theUserAddsUnitsToTheShoppingCart(int numberOfUnits) {
         OnStage.theActorInTheSpotlight().attemptsTo(AddItemToShoppingCart.thisNumerOfUnits(numberOfUnits));
     }
 
-    @When("^the user go to the Shopping cart$")
-    public void theUserGoToTheShoppingCart() {
-        OnStage.theActorInTheSpotlight().attemptsTo(Open.browserOn(cartPage));
-    }
-
     @Then("^The user see (\\d+) units the item (.*) and it's price$")
     public void theUserSeeUnitsTheItemAndItSPrice(int numberOfUnits, String itemName) {
-
+        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(IsTheItem.same(3, itemName),Matchers.comparesEqualTo(true)));
     }
 
 }

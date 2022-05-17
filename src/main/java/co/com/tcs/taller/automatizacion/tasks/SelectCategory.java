@@ -15,8 +15,6 @@ import java.time.Duration;
 
 public class SelectCategory implements Task {
 
-    @Managed
-    WebDriver driver;
 
     private String category;
 
@@ -31,7 +29,6 @@ public class SelectCategory implements Task {
                 MoveMouse.to(LinioHomePage.ITEM_NAV_MENU.of(category))*/
                 Click.on(LinioHomePage.ITEM_NAV_MENU.of(category))
         );
-        //System.out.println(LinioHomePage.ITEM_NAV_MENU.of(category).getCssOrXPathSelector());
     }
 
     public static SelectCategory inNavBar(String category){

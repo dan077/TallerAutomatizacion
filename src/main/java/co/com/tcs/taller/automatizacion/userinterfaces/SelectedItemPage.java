@@ -12,6 +12,8 @@ public class SelectedItemPage extends PageObject {
     public static final Target PRODUCT_NAME = Target.the("product_name").locatedBy("//span[@class=\"product-name\"]");
 
     public static final Target PRODUCT_PRICE = Target.the("product_price").locatedBy("//span[@class=\"price-main-md\"]");
+    public static final Target CLOSE_ALERT_ADD_TO_CAR = Target.the("close_alert_add_to_car").locatedBy("//div[@id=\"alert-add-to-cart\"]//a[@class=\"header-icon-close-container btn-link\"]/span");
+    public static final Target BUTTON_SHOPPING_CART = Target.the("button_shopping_cart").locatedBy("//a[@class=\"profile-cart\"]");
 
 
 }
