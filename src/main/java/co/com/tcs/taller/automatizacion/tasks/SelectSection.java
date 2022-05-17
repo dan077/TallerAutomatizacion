@@ -6,8 +6,6 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Click;
 
-import java.time.Duration;
-
 public class SelectSection implements Task {
 
     private String section;
@@ -18,7 +16,7 @@ public class SelectSection implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(Click.on(LinioHomePage.SECCION_NAV_MENU.of(section)));
+        actor.attemptsTo(Click.on(LinioHomePage.SECTION_NAV_MENU.of(section)));
     }
 
     public static SelectSection inNavbar(String section){
